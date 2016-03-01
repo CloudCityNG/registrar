@@ -244,5 +244,28 @@
             $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
         }
 
+        function testDelete()
+        {
+            //Arrange
+            $subject = "Math";
+            $course_number = "MTH101";
+            $id = 1;
+            $test_course = new Course($subject, $course_number, $id);
+            $test_course->save();
+
+            $name = "Maggie Pie";
+            $enrollment_date = '2016-03-05';
+            $id2 = 2;
+            $test_student = new Student($name, $enrollment_date, $id2);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->delete();
+
+            //Assert
+            $this->assertEquals([], $test_course->getStudents());
+        }
+
     }
 ?>

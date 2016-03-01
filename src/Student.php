@@ -68,7 +68,7 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
-            // $GLOBALS['DB']->exec("DELETE FROM categories_students WHERE student_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM students_courses WHERE student_id = {$this->getId()};");
         }
 
         function addCourse($course)

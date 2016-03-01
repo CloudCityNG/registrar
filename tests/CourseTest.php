@@ -224,29 +224,28 @@
             $this->assertEquals([$test_student, $test_student2], $test_course->getStudents());
         }
 
-        // function testDelete()
-        // {
-        //     //Arrange
-        //     $subject = "Math";
-        //     $course_number = "MTH101";
-        //     $id = 1;
-        //     $test_course = new Course($subject, $course_number, $id);
-        //     $test_course->save();
-        //
-        //     $subject2 = "Chem";
-        //     $course_number2 = "CHEM101";
-        //     $id2 = 2;
-        //     $test_course2 = new Course($subject2, $course_number2, $id2);
-        //     $test_course2->save();
-        //
-        //
-        //     //Act
-        //     $test_course->addStudent($test_task);
-        //     $test_course->delete();
-        //
-        //     //Assert
-        //     $this->assertEquals([], $test_task->getCategories());
-        // }
+        function testDelete()
+        {
+            //Arrange
+            $subject = "Math";
+            $course_number = "MTH101";
+            $id = 1;
+            $test_course = new Course($subject, $course_number, $id);
+            $test_course->save();
+
+            $name = "Maggie Pie";
+            $enrollment_date = '2016-03-05';
+            $id2 = 2;
+            $test_student = new Student($name, $enrollment_date, $id2);
+            $test_student->save();
+
+            //Act
+            $test_course->addStudent($test_student);
+            $test_course->delete();
+
+            //Assert
+            $this->assertEquals([], $test_student->getCourses());
+        }
     }
 
 ?>t
