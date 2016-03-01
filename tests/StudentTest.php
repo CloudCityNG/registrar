@@ -6,7 +6,7 @@
     */
 
     require_once "src/Student.php";
-    // require_once "src/Course.php";
+    require_once "src/Course.php";
 
     $server = 'mysql:host=localhost;dbname=registrar_test';
     $username = 'root';
@@ -192,57 +192,57 @@
         }
 
 
-        // function testAddCourse()
-        // {
-        //     //Arrange
-        //     $subject = "Chemistry 101";
-        //     $course_number = 'CHEM101';
-        //     $id = 1;
-        //     $test_course = new Course($subject, $course_number, $id);
-        //     $test_course->save();
-        //
-        //     $name = "Harry Houdini";
-        //     $enrollment_date = '2016-03-01';
-        //     $id = 1;
-        //     $test_student = new Student($name, $enrollment_date, $id);
-        //     $test_student->save();
-        //
-        //     //Act
-        //     $test_student->addCourse($test_course);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_student->getCourses(), [$test_course]);
-        // }
-        //
-        // function testGetCourses()
-        // {
-        //     //Arrange
-        //     $name = "Harry Houdini";
-        //     $enrollment_date = '2016-03-01';
-        //     $id = 1;
-        //     $test_student = new Student($name, $enrollment_date, $id);
-        //     $test_student->save();
-        //
-        //
-        //     $subject2 = "Chemistry 101";
-        //     $course_number = 'CHEM101';
-        //     $id2 = 1;
-        //     $test_course = new Course($subject2, $course_number, $id2);
-        //     $test_course->save();
-        //
-        //     $subject3 = "Chemistry 103";
-        //     $course_number2 = 'CHEM103';
-        //     $id3 = 2;
-        //     $test_course2 = new Course($subject3, $course_number, $id3);
-        //     $test_course2->save();
-        //
-        //     //Act
-        //     $test_student->addCourse($test_course);
-        //     $test_student->addCourse($test_course2);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
-        // }
+        function testAddCourse()
+        {
+            //Arrange
+            $subject = "Chemistry 101";
+            $course_number = 'CHEM101';
+            $id = 1;
+            $test_course = new Course($subject, $course_number, $id);
+            $test_course->save();
+
+            $name = "Harry Houdini";
+            $enrollment_date = '2016-03-01';
+            $id = 1;
+            $test_student = new Student($name, $enrollment_date, $id);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course]);
+        }
+
+        function testGetCourses()
+        {
+            //Arrange
+            $name = "Harry Houdini";
+            $enrollment_date = '2016-03-01';
+            $id = 1;
+            $test_student = new Student($name, $enrollment_date, $id);
+            $test_student->save();
+
+
+            $subject2 = "Chemistry 101";
+            $course_number = 'CHEM101';
+            $id2 = 1;
+            $test_course = new Course($subject2, $course_number, $id2);
+            $test_course->save();
+
+            $subject3 = "Chemistry 103";
+            $course_number2 = 'CHEM103';
+            $id3 = 2;
+            $test_course2 = new Course($subject3, $course_number, $id3);
+            $test_course2->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->addCourse($test_course2);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
+        }
 
     }
 ?>
