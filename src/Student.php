@@ -68,31 +68,31 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
-            // $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE task_id = {$this->getId()};");
+            // $GLOBALS['DB']->exec("DELETE FROM categories_students WHERE student_id = {$this->getId()};");
         }
 
-        // function addCategory($category)
-        // {
-        //     $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$category->getId()}, {$this->getId()});");
-        // }
+        function addCourse($course)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO students_courses (course_id, student_id) VALUES ({$course->getId()}, {$this->getId()});");
+        }
 
-        // function getCategories()
-        // {
-        //     $query = $GLOBALS['DB']->query("SELECT category_id FROM categories_tasks WHERE task_id = {$this->getId()};");
-        //     $category_ids = $query->fetchAll(PDO::FETCH_ASSOC);
-        //
-        //     $categories = array();
-        //     foreach($category_ids as $id) {
-        //         $category_id = $id['category_id'];
-        //         $result = $GLOBALS['DB']->query("SELECT * FROM categories WHERE id = {$category_id};");
-        //         $returned_category = $result->fetchAll(PDO::FETCH_ASSOC);
-        //
-        //         $name = $returned_category[0]['name'];
-        //         $id = $returned_category[0]['id'];
-        //         $new_category = new Category($name, $id);
-        //         array_push($categories, $new_category);
-        //     }
-        //     return $categories;
-        // }
+        function getCourses()
+        {
+            $query = $GLOBALS['DB']->query("SELECT courses.* FROM students
+                JOIN students_courses ON (students.id = students_courses.student_id)
+                JOIN courses ON (students_courses.course_id = courses.id)
+                WHERE students.id = {$this->getId()};");
+            $course_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $courses = array();
+            foreach($course_ids as $course) {
+                $subject = $course['subject'];
+                $course_number = $course['course_number'];
+                $id = $course['id'];
+                $new_course = new Course($subject, $course_number, $id);
+                array_push($courses, $new_course);
+            }
+            return $courses;
+        }
     }
 ?>
