@@ -120,7 +120,14 @@
     // Student pages
 
     $app->get("/students", function() use ($app) {
-        return $app['twig']->render('student.html.twig', array ('students' => Student::getAll(),
+        return $app['twig']->render('students.html.twig', array ('students' => Student::getAll(),
+        ));
+    });
+
+    $app->get("/student/{id}", function($id) use ($app) {
+        $student = Student::find($id);
+        return $app['twig']->render('student.html.twig', array(
+            'student' => $student, 'courses' => $student->getCourses(),
         ));
     });
 
@@ -134,14 +141,6 @@
             'student' => $student
         ));
     });
-
-    // $app->get("/student/{id}/edit", function($id) use ($app) {
-    //     $student = Student::find($id);
-    //
-    //     return $app['twig']->render('student_edit.html.twig', array(
-    //         'student' => $student
-    //     ));
-    // });
 
     $app->delete("/student/{student_id}/{course_id}", function($student_id, $course_id) use ($app) {
         $student = Student::find($student_id);

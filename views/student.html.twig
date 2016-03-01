@@ -6,34 +6,50 @@
   <body>
     {% include '/includes/navbar.html.twig' %}
     <div class="container">
-      <h1>Awesome University Registrar</h1>
-      {% include '/includes/message.html.twig'%}
-      <p>Below is a list of our wonderful students!</p>
-      <h1>Students</h1>
-        {% if students is not empty %}
-            <ul>
-            {% for student in students %}
-                    <h3>{{ student.getName }}</h3>
-                    <li>Enrollment Date: {{ student.getEnrollmentDate }}</li>
-                    {% if student.getCourses is not empty %}
-                    <ul>
-                        {% for course in student.getCourses %}
-                        <li>{{ course.getSubject }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                        <p>This student is not signed up for any courses.</p>
-                    {% endif %}
-                    </form>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>
-                No students added yet!
-            </p>
-        {% endif %}
+      <h1>Awesome University Registrar App</h1>
 
-        <a href="/"><button type="submit" class="btn btn-warning" name="button">Home</button></a>
+      {% include '/includes/message.html.twig'%}
+
+      <h2>Student: {{ student.getName }}</h2>
+      <!-- <a href="/course/{{ course.getId }}/delete" class="btn btn-info" role="button">Delete Student</a> -->
+
+      <p>{{ student.getName }} is enrolled in the following courses:</p>
+      {% if courses is not empty %}
+        <ul>
+          {% for course in courses %}
+            <li>
+              {{ course.getSubject }}
+              <!-- <a href="/student/{{ student.getId }}/edit">Edit</a> -->
+              <!-- <a href="/student/{{ student.getId }}/{{ course.getId }}/delete">Delete</a> -->
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>There are no current courses</p>
+      {% endif %}
+
+
+      <h2>Add a Course:</h2>
+      <form action='/course/{{ course.getId }}/addStudent' method='post'>
+        <div class="form-group">
+          <label for='course-subject'>Course Name</label>
+          <input name='course-subject' type='text' class='form-control'>
+        </div>
+        <button type='submit' class='btn btn-success'>Submit</button>
+      </form>
+
+      <!-- <h2>Delete Student:</h2>
+      <form action='/course/{{ course.getId }}/deleteAllStudents' method='post'>
+        <input name="_method" type="hidden" value="delete">
+        <button type='submit' class='btn btn-danger'>Delete All!</button>
+      </form> -->
+
+      <br>
+      <br>
+      <br>
+
+      <a href="/"><button type="submit" class="btn btn-warning" name="button">Home</button></a>
+
 
     </div>
   </body>
