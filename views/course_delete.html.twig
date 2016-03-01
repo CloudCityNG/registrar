@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/includes/head.html.twig' %}
+  </head>
+  <body>
+    {% include '/includes/navbar.html.twig' %}
+    <div class="container">
+      <h1>Awesome University Registrar App</h1>
+      <h2>Course: {{ course.getName }}</h2>
+      <h3>Are you sure you want to delete this course?</h3>
+
+      <form action='/course/{{ course.getId }}' method='post'>
+        <input name="_method" type="hidden" value="delete">
+        <button type='submit' class='btn btn-success'>Delete Course</button>
+        <a href="/course/{{ course.getId }}" class="btn btn-danger" role="button">Cancel</a>
+      </form>
+
+    </div>
+  </body>
+</html>

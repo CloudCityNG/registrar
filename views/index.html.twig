@@ -6,8 +6,42 @@
   <body>
     {% include '/includes/navbar.html.twig' %}
     <div class="container">
+      <h1>Awesome University Registrar</h1>
       {% include '/includes/message.html.twig'%}
-      {% include '/includes/form.html.twig' %}
+      <p>Below is a list of our wonderful courses!</p>
+
+      {% if courses is not empty %}
+        <ul>
+          {% for course in courses %}
+            <li class="well">
+              <a href="/course/{{ course.getId }}">{{ course.getSubject }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="well">
+          <h2>We currently have no courses!</h2>
+        </div>
+      {% endif %}
+
+      <h2>Add a course:</h2>
+      <form action='/' method='post'>
+        <div class="form-group">
+          <label for='course-subject'>Course Name</label>
+          <input name='course-subject' type='text' class='form-control'>
+          <label for='course-number'>Course Number</label>
+          <input name='course-number' type='text' class='form-control'>
+        </div>
+        <button type='submit' class='btn btn-success'>Submit</button>
+      </form>
+
+      <h2>Delete All Courses:</h2>
+      <form action='/deleteAll' method='post'>
+        <input name="_method" type="hidden" value="delete">
+        <button type='submit' class='btn btn-danger'>Delete All!</button>
+      </form>
+
+
     </div>
   </body>
 </html>

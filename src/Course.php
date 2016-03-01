@@ -39,6 +39,11 @@
             $GLOBALS['DB']->exec("DELETE FROM students_courses WHERE course_id = {$this->getId()};");
         }
 
+        function deleteStudent($student)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM students_courses WHERE student_id = {$student->getId()};");
+        }
+
         function addStudent($student)
         {
             $GLOBALS['DB']->exec("INSERT INTO students_courses (course_id, student_id) VALUES ({$this->getId()}, {$student->getId()});");

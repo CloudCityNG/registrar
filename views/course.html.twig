@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/includes/head.html.twig' %}
+  </head>
+  <body>
+    {% include '/includes/navbar.html.twig' %}
+    <div class="container">
+      <h1>Awesome University Registrar App</h1>
+
+      {% include '/includes/message.html.twig'%}
+
+      <h2>Course: {{ course.getSubject }}</h2>
+      <a href="/course/{{ course.getId }}/edit" class="btn btn-info" role="button">Edit Course Name</a>
+      <a href="/course/{{ course.getId }}/delete" class="btn btn-info" role="button">Delete Course</a>
+
+      <p>Below is a list of {{ course.getSubject }}'s students:</p>
+      {% if students is not empty %}
+        <ul>
+          {% for student in students %}
+            <li>
+              {{ student.getName }}
+              <!-- <a href="/student/{{ student.getId }}/edit">Edit</a> -->
+              <a href="/student/{{ student.getId }}/{{ course.getId }}/delete">Delete</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>There are no current students</p>
+      {% endif %}
+
+
+      <h2>Add a student:</h2>
+      <form action='/course/{{ course.getId }}/addStudent' method='post'>
+        <div class="form-group">
+          <label for='student-name'>Student Name</label>
+          <input name='student-name' type='text' class='form-control'>
+        </div>
+        <button type='submit' class='btn btn-success'>Submit</button>
+      </form>
+
+      <h2>Delete All Students:</h2>
+      <form action='/course/{{ course.getId }}/deleteAllStudents' method='post'>
+        <input name="_method" type="hidden" value="delete">
+        <button type='submit' class='btn btn-danger'>Delete All!</button>
+      </form>
+
+      <br>
+      <br>
+      <br>
+
+      <a href="/"><button type="submit" class="btn btn-warning" name="button">Home</button></a>
+
+
+    </div>
+  </body>
+</html>
