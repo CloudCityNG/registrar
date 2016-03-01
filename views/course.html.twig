@@ -11,7 +11,6 @@
       {% include '/includes/message.html.twig'%}
 
       <h2>Course: {{ course.getSubject }}</h2>
-      <a href="/course/{{ course.getId }}/edit" class="btn btn-info" role="button">Edit Course Name</a>
       <a href="/course/{{ course.getId }}/delete" class="btn btn-info" role="button">Delete Course</a>
 
       <p>Below is a list of {{ course.getSubject }}'s students:</p>
