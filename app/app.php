@@ -61,14 +61,6 @@
         ));
     });
 
-    // $app->get("/course/{id}/edit", function($id) use ($app) {
-    //     $course = Course::find($id);
-    //
-    //     return $app['twig']->render('course_edit.html.twig', array(
-    //         'course' => $course
-    //     ));
-    // });
-
     $app->get("/course/{id}/delete", function($id) use ($app) {
         $course = Course::find($id);
 
@@ -77,19 +69,7 @@
         ));
     });
 
-    // $app->patch("/course/{id}", function($id) use ($app) {
-    //     $course = Course::find($id);
-    //     $course->update($_POST['new-name']);
-    //
-    //     return $app['twig']->render('course.html.twig', array(
-    //         'course' => $course,
-    //         'students' => $course->getStudents(),
-    //         'message' => array(
-    //             'type' => 'info',
-    //             'text' => 'The name of your course was updated to ' . $course->getName()
-    //         )
-    //     ));
-    // });
+
 
     $app->delete("/course/{id}", function($id) use ($app) {
         $course = Course::find($id);
@@ -138,6 +118,13 @@
     });
 
     // Student pages
+
+    $app->get("/students", function() use ($app) {
+        return $app['twig']->render('student.html.twig', array ('students' => Student::getAll(),
+        ));
+    });
+
+
     $app->get("/student/{student_id}/{course_id}/delete", function($student_id, $course_id) use ($app) {
         $student = Student::find($student_id);
         $course = Course::find($course_id);
@@ -169,22 +156,11 @@
                 'text' => $student->getName() . " was deleted."
             )
         ));
+
+
+
     });
-    //
-    // $app->patch("/student/{id}", function($id) use ($app) {
-    //     $student = Student::find($id);
-    //     $student->update($_POST['new-name']);
-    //     $course = Course::find($student->getCourseId());
-    //
-    //     return $app['twig']->render('course.html.twig', array(
-    //         'students' => $course->getStudents(),
-    //         'course' => $course,
-    //         'message' => array(
-    //             'type' => 'info',
-    //             'text' => 'The name of your student was updated to ' . $student->getName()
-    //         )
-    //     ));
-    // });
+
 
     return $app;
 ?>

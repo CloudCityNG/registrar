@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/includes/head.html.twig' %}
+  </head>
+  <body>
+    {% include '/includes/navbar.html.twig' %}
+    <div class="container">
+      <h1>Awesome University Registrar</h1>
+      {% include '/includes/message.html.twig'%}
+      <p>Below is a list of our wonderful students!</p>
+      <h1>Students</h1>
+        {% if students is not empty %}
+            <ul>
+            {% for student in students %}
+                    <h3>{{ student.getName }}</h3>
+                    <li>Enrollment Date: {{ student.getEnrollmentDate }}</li>
+                    {% if student.getCourses is not empty %}
+                    <ul>
+                        {% for course in student.getCourses %}
+                        <li>{{ course.getSubject }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <p>This student is not signed up for any courses.</p>
+                    {% endif %}
+                    </form>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                No students added yet!
+            </p>
+        {% endif %}
+
+        <a href="/"><button type="submit" class="btn btn-warning" name="button">Home</button></a>
+
+    </div>
+  </body>
+</html>
